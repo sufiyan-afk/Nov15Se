@@ -1,1 +1,0 @@
-variable that retains its value betn multiple func calls and persists for the entire duration of the program execution is called static variable in c
