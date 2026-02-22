@@ -1,0 +1,1038 @@
+Module 4 – Introduction to DBMS
+
+Introduction to SQL
+
+Theory Questions: 
+1. What is SQL, and why is it essential in database management?
+SQL (Structured Query Language) is a standard programming language used to create, manage, and manipulate databases.
+🔹 Why SQL is Essential:
+•	It allows storing and retrieving data efficiently.
+•	It helps manage large amounts of structured data.
+•	It is used to create tables, insert records, update data, and delete data.
+•	It ensures data integrity and security.
+Without SQL, managing relational databases would be very difficult.
+ 
+2. Difference Between DBMS and RDBMS
+Feature	DBMS	RDBMS
+Full Form	Database Management System	Relational Database Management System
+Data Storage	Stored as files	Stored in tables (rows & columns)
+Relationship	No relationship between data	Tables are related using keys
+Normalization	Not supported	Supported
+Example	File System	MySQL, Oracle
+
+RDBMS is an advanced form of DBMS that stores data in relational tables and maintains relationships using primary and foreign keys.
+________________________________________
+3. Role of SQL in Managing Relational Databases
+SQL is used to:
+🔹 Create Database Structure
+•	CREATE
+•	ALTER
+•	DROP
+🔹 Manage Data
+•	INSERT
+•	UPDATE
+•	DELETE
+🔹 Retrieve Data
+•	SELECT
+🔹 Control Access
+•	GRANT
+•	REVOKE
+SQL helps in:
+•	Maintaining data consistency
+•	Enforcing constraints
+•	Managing transactions
+________________________________________
+4. Key Features of SQL
+✅ 1. Easy to Learn
+Simple and readable syntax.
+✅ 2. Standardized Language
+Used worldwide for relational databases.
+✅ 3. Supports CRUD Operations
+Create, Read, Update, Delete.
+✅ 4. Data Integrity
+Supports constraints like:
+•	PRIMARY KEY
+•	FOREIGN KEY
+•	UNIQUE
+•	NOT NULL
+✅ 5. Security
+Provides user authentication and access control.
+✅ 6. Supports Transactions
+Ensures ACID properties (Atomicity, Consistency, Isolation, Durability).
+
+Lab exercise
+✅ Lab 1: Create a new database named school_db and a table called students with the following columns: student_id, student_name, age, class, and address.
+🔹 Step 1: Create Database
+CREATE DATABASE school_db;
+🔹 Step 2: Use the Database
+USE school_db;
+🔹 Step 3: Create Table students
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    age INT,
+    class VARCHAR(20),
+    address VARCHAR(100)
+);
+✔ Explanation:
+•	student_id → Unique ID (Primary Key)
+•	student_name → Name of student
+•	age → Student age
+•	class → Class/Grade
+•	address → Student address
+________________________________________
+✅ Lab 2: Insert five records into the students table and retrieve all records using the SELECT statement.
+🔹 Step 1: Insert Five Records
+INSERT INTO students VALUES
+(1, 'Alice', 14, '8A', 'New York'),
+(2, 'Bob', 15, '9B', 'Los Angeles'),
+(3, 'Charlie', 13, '7A', 'Chicago'),
+(4, 'David', 14, '8B', 'Houston'),
+(5, 'Emma', 15, '9A', 'Phoenix');
+________________________________________
+🔹 Step 2: Retrieve All Records
+SELECT * FROM students;
+________________________________________
+✅ Expected Output (Sample)
+student_id	student_name	age	class	address
+1	Alice	14	8A	New York
+2	Bob	15	9B	Los Angeles
+3	Charlie	13	7A	Chicago
+4	David	14	8B	Houston
+5	Emma	15	9A	Phoenix
+
+
+2. SQL Syntax	
+
+
+			
+Theory Questions:
+1. What are the basic components of SQL syntax?
+The basic components of SQL syntax are the fundamental parts used to write SQL statements. These include:
+1.	Keywords – Reserved words that have special meaning in SQL such as SELECT, INSERT, UPDATE, DELETE, CREATE, WHERE, etc.
+2.	Clauses – Sections of a statement that perform specific tasks, such as FROM, WHERE, GROUP BY, ORDER BY.
+3.	Expressions – Combinations of values, columns, and operators that produce a result.
+4.	Operators – Symbols used to perform operations like =, >, <, AND, OR, LIKE.
+5.	Identifiers – Names given to database objects such as tables, columns, and databases.
+6.	Literals – Fixed values such as numbers or strings (e.g., 10, 'John').
+SQL statements are not case-sensitive, but keywords are usually written in uppercase for better readability
+2. Write the general structure of an SQL SELECT statement.
+The general structure of an SQL SELECT statement is:
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name
+HAVING condition
+ORDER BY column_name;
+Example structure:
+SELECT *
+FROM students
+WHERE age > 14
+ORDER BY student_name;
+Explanation:
+•	SELECT specifies the columns to retrieve.
+•	FROM specifies the table.
+•	WHERE filters records.
+•	GROUP BY groups rows.
+•	HAVING applies conditions to grouped data.
+•	ORDER BY sorts the result.
+
+3. Explain the role of clauses in SQL statements.
+Clauses in SQL statements define different parts of a query and control how data is retrieved or manipulated.
+Each clause has a specific function:
+1.	SELECT clause – Specifies which columns to display.
+2.	FROM clause – Specifies the table from which data is retrieved.
+3.	WHERE clause – Filters records based on conditions.
+4.	GROUP BY clause – Groups rows that have the same values.
+5.	HAVING clause – Filters grouped records.
+6.	ORDER BY clause – Sorts the result in ascending or descending order.
+Clauses help structure SQL queries and make them more organized and readable. They allow users to control data selection, filtering, grouping, and sorting effectively.
+LAB EXERCISES:
+• Lab 1: Write SQL queries to retrieve specific columns (student_name and age) from the students table
+SELECT student_name, age
+FROM students;
+• Lab 2: Write SQL queries to retrieve all students whose age is greater than 10.
+SELECT *
+FROM students
+WHERE age > 10;
+
+3. SQL Constraints
+
+Theory Questions:
+
+1. What are constraints in SQL? List and explain the different types of constraints.
+Answer:
+Constraints in SQL are rules applied to table columns to ensure the accuracy, reliability, and integrity of data in a database.
+They prevent invalid data from being inserted into the table.
+Types of Constraints:
+1.	NOT NULL
+o	Ensures that a column cannot have NULL (empty) values.
+o	Example: A student name should not be empty.
+2.	UNIQUE
+o	Ensures that all values in a column are different.
+o	No duplicate values are allowed.
+3.	PRIMARY KEY
+o	Uniquely identifies each record in a table.
+o	It is a combination of NOT NULL + UNIQUE.
+o	Each table can have only one primary key.
+4.	FOREIGN KEY
+o	Creates a link between two tables.
+o	Ensures referential integrity.
+o	The value in one table must match a value in another table.
+5.	CHECK
+o	Ensures that values meet a specific condition.
+o	Example: age > 5.
+6.	DEFAULT
+o	Provides a default value if no value is inserted.
+________________________________________
+2. How do PRIMARY KEY and FOREIGN KEY constraints differ?
+Answer:
+PRIMARY KEY	FOREIGN KEY
+Uniquely identifies each record in a table	Links one table to another
+Cannot contain NULL values	Can contain NULL values (if allowed)
+Only one primary key per table	A table can have multiple foreign keys
+Ensures entity integrity	Ensures referential integrity
+Example:
+•	student_id in students table → PRIMARY KEY
+•	student_id in marks table → FOREIGN KEY
+The foreign key must match a value that exists in the primary key of the parent table.
+________________________________________
+3. What is the role of NOT NULL and UNIQUE constraints?
+Answer:
+NOT NULL:
+•	Ensures that a column cannot store NULL values.
+•	Makes sure important data is not left empty.
+•	Example: student_name should always have a value.
+UNIQUE:
+•	Ensures all values in a column are different.
+•	Prevents duplicate entries.
+•	Example: email id should be unique for every student.
+LAB EXERCISES:
+Lab 1: Create a table teachers with the following columns: teacher_id (Primary Key), teacher_name (NOT NULL), subject (NOT NULL), and email (UNIQUE).
+
+CREATE TABLE teachers (
+    teacher_id INT PRIMARY KEY,
+    teacher_name VARCHAR(100) NOT NULL,
+    subject VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE
+);
+
+• Lab 2: Implement a FOREIGN KEY constraint to relate the teacher_id from the teachers table with the students table.
+
+ALTER TABLE students
+ADD CONSTRAINT fk_teacher
+FOREIGN KEY (teacher_id)
+REFERENCES teachers(teacher_id);
+
+4. Main SQL Commands and Sub-commands (DDL)
+Theory Questions:
+________________________________________
+1. Define the SQL Data Definition Language (DDL).
+Answer:
+Data Definition Language (DDL) is a set of SQL commands used to define, modify, and manage the structure of database objects such as tables, schemas, and indexes.
+DDL commands deal with the structure of the database, not the data inside it.
+Common DDL Commands:
+•	CREATE → To create database objects
+•	ALTER → To modify existing objects
+•	DROP → To delete objects
+•	TRUNCATE → To remove all records from a table
+DDL commands automatically save changes (auto-commit).
+________________________________________
+2. Explain the CREATE command and its syntax.
+Answer:
+The CREATE command is used to create new database objects such as tables, databases, views, etc.
+It defines the structure of the table including columns, data types, and constraints.
+Syntax:
+CREATE TABLE table_name (
+    column1 datatype constraint,
+    column2 datatype constraint,
+    column3 datatype constraint
+);
+Example:
+CREATE TABLE students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(100) NOT NULL,
+    age INT
+);
+This creates a table named students with three columns.
+________________________________________
+3. What is the purpose of specifying data types and constraints during table creation?
+Answer:
+Purpose of Data Types:
+•	Define what kind of data can be stored in a column.
+•	Example:
+o	INT → Stores numbers
+o	VARCHAR → Stores text
+o	DATE → Stores date values
+•	Prevents storing incorrect data types.
+Purpose of Constraints:
+•	Enforce rules on data.
+•	Maintain data accuracy and integrity.
+•	Examples:
+o	PRIMARY KEY → Uniquely identifies records
+o	NOT NULL → Prevents empty values
+o	UNIQUE → Prevents duplicate values
+o	FOREIGN KEY → Maintains relationship between tables
+Without data types and constraints, the database may store invalid or duplicate data.
+
+LAB EXERCISES:
+
+• Lab 1: Create a table courses with columns: course_id, course_name, and course_credits. Set the course_id as the primary key.
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100),
+    course_credits INT
+);
+Lab 2: Use the CREATE command to create a database university_db.
+CREATE DATABASE university_db;
+
+
+
+5. ALTER Command
+
+Theory Questions:
+1. What is the use of the ALTER command in SQL?
+Answer:
+The ALTER command in SQL is used to modify the structure of an existing database table without deleting its data.
+Uses of ALTER command:
+•	Add new columns to a table
+•	Modify the data type or size of existing columns
+•	Drop (delete) columns from a table
+•	Add or drop constraints (e.g., PRIMARY KEY, FOREIGN KEY)
+It helps update the table structure as per changing requirements without losing existing records.
+________________________________________
+2. How can you add, modify, and drop columns from a table using ALTER?
+Answer:
+1️⃣ Add a Column
+ALTER TABLE table_name
+ADD column_name datatype;
+Example:
+ALTER TABLE students
+ADD grade VARCHAR(10);
+________________________________________
+2️⃣ Modify a Column
+ALTER TABLE table_name
+MODIFY column_name new_datatype;
+Example:
+ALTER TABLE students
+MODIFY age SMALLINT;
+________________________________________
+3️⃣ Drop a Column
+ALTER TABLE table_name
+DROP COLUMN column_name;
+Example:
+ALTER TABLE students
+DROP COLUMN grade;
+
+
+LAB EXERCISES:
+Lab 1: Modify the courses table by adding a column course_duration using the ALTER command.
+ALTER TABLE courses
+ADD course_duration VARCHAR(20);
+
+• Lab 2: Drop the course_credits column from the courses table.
+ALTER TABLE courses
+DROP COLUMN course_credits;
+           6.DROP Command 
+Theory Questions:
+1. What is the function of the DROP command in SQL?
+Answer:
+The DROP command in SQL is used to delete database objects such as tables, databases, or views permanently.
+•	It removes the object structure and all the data stored in it.
+•	Once executed, the action cannot be undone, so it should be used with caution.
+Syntax:
+-- Drop a table
+DROP TABLE table_name;
+
+-- Drop a database
+DROP DATABASE database_name;
+________________________________________
+2. What are the implications of dropping a table from a database?
+Answer:
+Dropping a table has several important consequences:
+1.	Permanent Data Loss
+o	All records in the table are deleted permanently.
+o	Cannot be recovered unless a backup exists.
+2.	Loss of Table Structure
+o	Table columns, data types, and constraints are removed.
+3.	Affects Relationships
+o	If the table is referenced by a foreign key in another table, dropping it may cause referential integrity issues.
+4.	Cascading Effects
+o	Any dependent objects like views, triggers, or indexes may become invalid.
+
+LAB EXERCISES:
+Lab 1: Drop the teachers table from the school_db database
+DROP TABLE teachers;
+
+Lab 2: Drop the students table from the school_db database and verify that the table has been removed.
+drop the table
+DROP TABLE students;
+
+Verify table deletion
+SHOW TABLES;
+
+
+7.	Data Manipulation Language (DML)
+
+Theory Questions:
+1. Define the INSERT, UPDATE, and DELETE commands in SQL.
+Answer:
+INSERT
+•	The INSERT command is used to add new records (rows) into a table.
+•	Example:
+INSERT INTO students (student_id, student_name, age)
+VALUES (1, 'Alice', 14);
+UPDATE
+•	The UPDATE command is used to modify existing records in a table.
+•	Example:
+UPDATE students
+SET age = 15
+WHERE student_id = 1;
+DELETE
+•	The DELETE command is used to remove existing records from a table.
+•	Example:
+DELETE FROM students
+WHERE student_id = 1;
+________________________________________
+2. What is the importance of the WHERE clause in UPDATE and DELETE operations?
+Answer:
+•	The WHERE clause is used to specify which records should be updated or deleted.
+•	Without a WHERE clause:
+o	UPDATE will modify all rows in the table.
+o	DELETE will remove all rows in the table.
+•	Using WHERE ensures that only specific records are affected, preventing accidental data loss.
+Example:
+-- Update only Alice's age
+UPDATE students
+SET age = 15
+WHERE student_name = 'Alice';
+
+-- Delete only Alice's record
+DELETE FROM students
+WHERE student_name = 'Alice';
+
+LAB EXERCISES:
+
+Lab 1: Insert three records into the courses table using the INSERT command
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(101, 'Mathematics', '6 months'),
+(102, 'Physics', '5 months'),
+(103, 'Chemistry', '6 months');
+________________________________________
+Lab 2: Update the course duration of a specific course using the UPDATE command
+UPDATE courses
+SET course_duration = '7 months'
+WHERE course_id = 102;
+________________________________________
+Lab 3: Delete a course with a specific course_id from the courses table using the DELETE command
+DELETE FROM courses
+WHERE course_id = 103;
+
+
+8.	Data Query Language (DQL)
+Theory Questions:
+1. What is the SELECT statement, and how is it used to query data?
+Answer:
+•	The SELECT statement in SQL is used to retrieve data from one or more tables in a database.
+•	It allows specifying which columns to display and can include conditions to filter the data.
+Syntax:
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+Example:
+SELECT student_name, age
+FROM students
+WHERE age > 14;
+•	This query retrieves the student_name and age of students whose age is greater than 14.
+________________________________________
+2. Explain the use of the ORDER BY and WHERE clauses in SQL queries
+Answer:
+WHERE Clause
+•	Used to filter records based on specific conditions.
+•	Ensures only rows meeting the condition are retrieved.
+Example:
+SELECT * 
+FROM students
+WHERE age > 14;
+________________________________________
+ORDER BY Clause
+•	Used to sort the retrieved records in ascending (ASC) or descending (DESC) order.
+•	Default sorting is ascending.
+Example:
+SELECT student_name, age
+FROM students
+ORDER BY age DESC;
+•	This query lists students sorted by age from highest to lowest.
+LAB EXERCISES:
+Lab 1: Retrieve all courses from the courses table using the SELECT statement
+SELECT * 
+FROM courses;
+________________________________________
+Lab 2: Sort the courses based on course_duration in descending order using ORDER BY
+SELECT * 
+FROM courses
+ORDER BY course_duration DESC;
+________________________________________
+Lab 3: Limit the results of the SELECT query to show only the top two courses using LIMIT
+SELECT * 
+FROM courses
+LIMIT 2;
+
+9.	Data Control Language (DCL)
+Theory Questions:
+1. What is the purpose of GRANT and REVOKE in SQL?
+Answer:
+•	GRANT and REVOKE are SQL commands used to manage user privileges on database objects such as tables, views, and databases.
+GRANT
+•	Gives a user permission to perform specific actions like SELECT, INSERT, UPDATE, DELETE.
+•	Example:
+GRANT SELECT, INSERT ON students TO 'user1';
+REVOKE
+•	Removes previously granted privileges from a user.
+•	Example:
+REVOKE INSERT ON students FROM 'user1';
+________________________________________
+2. How do you manage privileges using these commands?
+Answer:
+•	Granting Privileges
+o	Allows a user to access or modify database objects according to their role.
+o	Common privileges include: SELECT, INSERT, UPDATE, DELETE, CREATE, DROP.
+•	Revoking Privileges
+o	Restricts or removes a user’s access rights.
+o	Ensures security by preventing unauthorized operations.
+Example Workflow:
+1.	Grant SELECT and INSERT privileges to a user:
+GRANT SELECT, INSERT ON courses TO 'user1';
+2.	Later, revoke INSERT privilege if not needed:
+REVOKE INSERT ON courses FROM 'user1';
+This way, database security and access control are maintained effectively
+
+LAB EXERCISES:
+Lab 1: Create two new users user1 and user2 and grant user1 permission to SELECT from the courses table
+-- Create users
+CREATE USER 'user1'@'localhost' IDENTIFIED BY 'password1';
+CREATE USER 'user2'@'localhost' IDENTIFIED BY 'password2';
+
+-- Grant SELECT privilege on courses table to user1
+GRANT SELECT ON courses TO 'user1'@'localhost';
+________________________________________
+Lab 2: Revoke the INSERT permission from user1 and give it to user2
+-- Revoke INSERT privilege from user1
+REVOKE INSERT ON courses FROM 'user1'@'localhost';
+
+-- Grant INSERT privilege to user2
+GRANT INSERT ON courses TO 'user2'@'localhost';
+
+10. Transaction Control Language (TCL)
+
+Theory Questions
+1. What is the purpose of the COMMIT and ROLLBACK commands in SQL?
+•	COMMIT:
+o	Saves all changes made in the current transaction permanently to the database.
+o	Example: After inserting or updating records, use COMMIT to finalize the changes.
+•	ROLLBACK:
+o	Reverts all changes made in the current transaction to the last committed state.
+o	Useful for undoing mistakes or errors before committing.
+________________________________________
+2. Explain how transactions are managed in SQL databases
+•	A transaction is a sequence of one or more SQL statements executed as a single unit.
+•	Transaction Management ensures:
+1.	Atomicity – All statements succeed or all fail.
+2.	Consistency – Database remains in a valid state.
+3.	Isolation – Transactions don’t interfere with each other.
+4.	Durability – Committed changes are permanent.
+•	Commands used:
+o	START TRANSACTION or BEGIN → Begin a transaction
+o	COMMIT → Save changes
+o	ROLLBACK → Undo changes
+o	SAVEPOINT → Set a point to roll back to
+________________________________________
+Lab Exercises
+Lab 1: Insert a few rows into the courses table and use COMMIT
+START TRANSACTION;
+
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(104, 'Biology', '6 months'),
+(105, 'Computer Science', '8 months');
+
+COMMIT;
+________________________________________
+Lab 2: Insert additional rows, then use ROLLBACK to undo the last insert operation
+START TRANSACTION;
+
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(106, 'History', '5 months'),
+(107, 'Geography', '5 months');
+
+ROLLBACK;
+•	The last insert (History and Geography) will be undone.
+________________________________________
+Lab 3: Create a SAVEPOINT before updating the courses table, and use it to roll back specific changes
+START TRANSACTION;
+
+-- Set a savepoint
+SAVEPOINT before_update;
+
+-- Update course duration
+UPDATE courses
+SET course_duration = '7 months'
+WHERE course_id = 104;
+
+-- Roll back to savepoint
+ROLLBACK TO SAVEPOINT before_update;
+
+COMMIT;
+•	Only updates after the SAVEPOINT are undone; previous changes remain intact.
+            
+             11.SQL Joins
+
+Theory Questions
+1. Explain the concept of JOIN in SQL. What is the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL OUTER JOIN?
+•	JOIN: Combines rows from two or more tables based on a related column between them.
+•	Types of JOINs:
+JOIN Type	Description
+INNER JOIN	Returns only the rows where there is a match in both tables.
+LEFT JOIN (or LEFT OUTER JOIN)	Returns all rows from the left table and matched rows from the right table. If no match, NULL values appear for the right table.
+RIGHT JOIN (or RIGHT OUTER JOIN)	Returns all rows from the right table and matched rows from the left table. If no match, NULL values appear for the left table.
+FULL OUTER JOIN	Returns all rows from both tables. Non-matching rows show NULL for missing columns.
+________________________________________
+2. How are joins used to combine data from multiple tables?
+•	Joins relate tables using a common column (usually a primary key and foreign key).
+•	They allow querying data from multiple tables in a single SELECT statement.
+•	Example: Displaying employees along with the department name using the department_id.
+________________________________________
+Lab Exercises
+Lab 1: Create two tables: departments and employees. Perform an INNER JOIN
+-- Create tables
+CREATE TABLE departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+);
+
+-- Insert sample data
+INSERT INTO departments VALUES
+(1, 'HR'),
+(2, 'IT'),
+(3, 'Finance');
+
+INSERT INTO employees VALUES
+(101, 'Alice', 1),
+(102, 'Bob', 2),
+(103, 'Charlie', 2);
+
+-- Perform INNER JOIN
+SELECT employees.emp_id, employees.emp_name, departments.dept_name
+FROM employees
+INNER JOIN departments
+ON employees.dept_id = departments.dept_id;
+________________________________________
+Lab 2: Use a LEFT JOIN to show all departments, even those without employees
+SELECT departments.dept_id, departments.dept_name, employees.emp_name
+FROM departments
+LEFT JOIN employees
+ON departments.dept_id = employees.dept_id;
+
+
+
+                  12. SQL Group By
+
+Theory Questions
+1. What is the GROUP BY clause in SQL? How is it used with aggregate functions?
+•	The GROUP BY clause is used to group rows that have the same values in one or more columns into summary rows.
+•	It is often used with aggregate functions like COUNT(), SUM(), AVG(), MAX(), MIN().
+Example:
+SELECT dept_id, COUNT(emp_id) AS num_employees
+FROM employees
+GROUP BY dept_id;
+•	Groups employees by dept_id and counts the number of employees in each department.
+________________________________________
+2. Explain the difference between GROUP BY and ORDER BY
+Clause	Purpose
+GROUP BY	Groups rows with the same value in one or more columns to apply aggregate functions.
+ORDER BY	Sorts the result set in ascending (ASC) or descending (DESC) order.
+•	GROUP BY is for aggregation, ORDER BY is for sorting.
+________________________________________
+Lab Exercises
+Lab 1: Group employees by department and count the number of employees in each department
+SELECT dept_id, COUNT(emp_id) AS num_employees
+FROM employees
+GROUP BY dept_id;
+________________________________________
+Lab 2: Use the AVG aggregate function to find the average salary of employees in each department
+-- Assuming the employees table has a salary column
+SELECT dept_id, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY dept_id;
+
+
+           13. SQL Stored Procedure
+Theory Questions
+1. What is a stored procedure in SQL, and how does it differ from a standard SQL query?
+•	A stored procedure is a predefined set of SQL statements stored in the database that can be executed as a single unit.
+•	Differences from standard SQL query:
+Feature	Standard SQL Query	Stored Procedure
+Definition	Written and executed directly	Predefined and stored in the database
+Reusability	Not reusable unless rewritten	Can be reused multiple times
+Parameters	Cannot accept parameters	Can accept input and output parameters
+Performance	Executes each time from scratch	Executes faster due to precompilation
+________________________________________
+2. Explain the advantages of using stored procedures
+•	Reusability – Write once, use multiple times.
+•	Performance – Precompiled, executes faster than ad-hoc queries.
+•	Security – Restrict direct access to tables, control user privileges.
+•	Maintainability – Centralized logic makes updates easier.
+•	Reduced Network Traffic – Multiple SQL statements can be executed in a single call.
+________________________________________
+Lab Exercises
+Lab 1: Stored procedure to retrieve all employees from the employees table based on department
+DELIMITER //
+
+CREATE PROCEDURE GetEmployeesByDept(IN deptID INT)
+BEGIN
+    SELECT emp_id, emp_name, dept_id
+    FROM employees
+    WHERE dept_id = deptID;
+END //
+
+DELIMITER ;
+Usage:
+CALL GetEmployeesByDept(2);
+________________________________________
+Lab 2: Stored procedure that accepts course_id as input and returns the course details
+DELIMITER //
+
+CREATE PROCEDURE GetCourseDetails(IN cID INT)
+BEGIN
+    SELECT course_id, course_name, course_duration
+    FROM courses
+    WHERE course_id = cID;
+END //
+
+DELIMITER ;
+Usage:
+CALL GetCourseDetails(101);
+
+
+
+
+
+             14. SQL View
+Theory Questions
+1. What is a view in SQL, and how is it different from a table?
+•	A view is a virtual table based on the result of a SQL query.
+•	It does not store data physically but displays data from one or more underlying tables.
+Differences from a table:
+Feature	Table	View
+Data Storage	Stores data physically	Does not store data physically
+Updates	Can store and update data	May be read-only (depending on the query)
+Purpose	Main data storage	Simplifies complex queries, hides complexity
+Structure	Has its own columns	Defined by SELECT query
+________________________________________
+2. Explain the advantages of using views in SQL databases
+•	Simplify Complex Queries – Encapsulates joins and calculations.
+•	Security – Restrict access to specific columns or rows.
+•	Data Consistency – Provides a consistent representation of data.
+•	Reusability – Queries can be reused multiple times without rewriting.
+•	Logical Data Independence – Hides underlying table structure changes.
+________________________________________
+Lab Exercises
+Lab 1: Create a view to show all employees along with their department names
+CREATE VIEW EmployeeDept AS
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id;
+Usage:
+SELECT * FROM EmployeeDept;
+________________________________________
+Lab 2: Modify the view to exclude employees whose salaries are below $50,000
+CREATE OR REPLACE VIEW EmployeeDept AS
+SELECT e.emp_id, e.emp_name, d.dept_name, e.salary
+FROM employees e
+INNER JOIN departments d
+ON e.dept_id = d.dept_id
+WHERE e.salary >= 50000;
+Usage:
+SELECT * FROM EmployeeDept;
+
+                     
+
+
+                      15. SQL Triggers
+
+Theory Questions
+1. What is a trigger in SQL? Describe its types and when they are used.
+•	A trigger is a special kind of stored procedure that automatically executes in response to certain events on a table, such as INSERT, UPDATE, or DELETE.
+Types of Triggers:
+Trigger Type	When It Fires	Description
+BEFORE INSERT	Before a new row is inserted	Used for validation or modifying data before insert
+AFTER INSERT	After a new row is inserted	Used for logging or additional processing
+BEFORE UPDATE	Before a row is updated	Modify or validate data before updating
+AFTER UPDATE	After a row is updated	Track changes or update other tables
+BEFORE DELETE	Before a row is deleted	Prevent deletion or log info
+AFTER DELETE	After a row is deleted	Track deletions in audit tables
+________________________________________
+2. Explain the difference between INSERT, UPDATE, and DELETE triggers
+Trigger Event	Action Triggered	Use Case
+INSERT Trigger	Fires when a new row is added	Log new entries, initialize default values
+UPDATE Trigger	Fires when a row is modified	Track modifications, update timestamps
+DELETE Trigger	Fires when a row is deleted	Maintain audit trail, prevent accidental deletion
+________________________________________
+Lab Exercises
+Lab 1: Create a trigger to automatically log changes when a new employee is added
+-- Create a log table
+CREATE TABLE employee_log (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT,
+    emp_name VARCHAR(50),
+    action_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    action_type VARCHAR(20)
+);
+
+-- Create trigger
+DELIMITER //
+
+CREATE TRIGGER after_employee_insert
+AFTER INSERT ON employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO employee_log (emp_id, emp_name, action_type)
+    VALUES (NEW.emp_id, NEW.emp_name, 'INSERT');
+END //
+
+DELIMITER ;
+________________________________________
+Lab 2: Create a trigger to update the last_modified timestamp whenever an employee record is updated
+-- Add last_modified column to employees table if not exists
+ALTER TABLE employees
+ADD COLUMN last_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+-- Optional trigger (if automatic timestamp not used)
+DELIMITER //
+
+CREATE TRIGGER before_employee_update
+BEFORE UPDATE ON employees
+FOR EACH ROW
+BEGIN
+    SET NEW.last_modified = CURRENT_TIMESTAMP;
+END //
+
+DELIMITER ;
+
+
+          16. Introduction to PL/SQL
+Theory Questions
+1. What is PL/SQL, and how does it extend SQL's capabilities?
+•	PL/SQL (Procedural Language/SQL) is Oracle’s procedural extension to SQL.
+•	It allows writing procedural code (variables, loops, conditionals, and exceptions) along with SQL queries.
+•	Extensions over SQL:
+o	Supports variables and constants.
+o	Allows conditional statements (IF…ELSE).
+o	Supports loops (FOR, WHILE).
+o	Provides error handling via EXCEPTION blocks.
+o	Can create procedures, functions, triggers, and packages.
+________________________________________
+2. List and explain the benefits of using PL/SQL
+•	Modularity – Code can be organized into procedures, functions, and packages.
+•	Reusability – Write once, use multiple times.
+•	Performance – Reduces network traffic by executing multiple statements in a single block.
+•	Error Handling – Provides structured exception handling.
+•	Integration – Works seamlessly with SQL for querying and modifying data.
+________________________________________
+Lab Exercises
+Lab 1: PL/SQL block to print the total number of employees
+DECLARE
+    total_emp NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO total_emp
+    FROM employees;
+    
+    DBMS_OUTPUT.PUT_LINE('Total number of employees: ' || total_emp);
+END;
+/
+________________________________________
+Lab 2: PL/SQL block to calculate total sales from an orders table
+DECLARE
+    total_sales NUMBER;
+BEGIN
+    SELECT SUM(order_amount) INTO total_sales
+    FROM orders;
+    
+    DBMS_OUTPUT.PUT_LINE('Total sales: $' || total_sales);
+END;
+/
+
+17. PL/SQL Control Structures
+Theory Questions
+1. What are control structures in PL/SQL? Explain the IF-THEN and LOOP control structures.
+•	Control structures in PL/SQL allow you to control the flow of execution in a PL/SQL block.
+•	They include conditional statements (IF-THEN, IF-THEN-ELSE, CASE) and loops (LOOP, FOR, WHILE).
+IF-THEN
+•	Executes a block of code only if a specified condition is true.
+IF condition THEN
+   -- statements to execute
+END IF;
+LOOP
+•	Repeats a block of code multiple times until a condition is met (or indefinitely with EXIT).
+LOOP
+   -- statements
+   EXIT WHEN condition;  -- optional exit
+END LOOP;
+________________________________________
+2. How do control structures in PL/SQL help in writing complex queries?
+•	They allow decision-making (IF-THEN-ELSE) and repetition (LOOPS).
+•	Enables dynamic and conditional processing of data.
+•	Supports batch operations on multiple rows without writing separate queries.
+•	Makes PL/SQL suitable for business logic and complex data manipulations.
+________________________________________
+Lab Exercises
+Lab 1: PL/SQL block using IF-THEN to check an employee’s department
+DECLARE
+    emp_dept VARCHAR2(50);
+BEGIN
+    SELECT dept_name INTO emp_dept
+    FROM departments d
+    JOIN employees e ON d.dept_id = e.dept_id
+    WHERE e.emp_id = 101;
+
+    IF emp_dept = 'IT' THEN
+        DBMS_OUTPUT.PUT_LINE('Employee belongs to IT department.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Employee does not belong to IT department.');
+    END IF;
+END;
+/
+________________________________________
+Lab 2: PL/SQL block using a FOR LOOP to display all employee names
+BEGIN
+    FOR emp_rec IN (SELECT emp_name FROM employees) LOOP
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || emp_rec.emp_name);
+    END LOOP;
+END;
+/
+         18. SQL Cursors
+
+Theory Questions
+1. What is a cursor in PL/SQL? Explain the difference between implicit and explicit cursors.
+•	A cursor in PL/SQL is a pointer that allows you to fetch and process rows returned by a query one at a time.
+Types of Cursors:
+Cursor Type	Description
+Implicit Cursor	Automatically created by PL/SQL when a SELECT INTO statement is executed. No need to declare it explicitly.
+Explicit Cursor	Declared and controlled by the programmer to fetch multiple rows from a query. Provides more control over row processing.
+________________________________________
+2. When would you use an explicit cursor over an implicit one?
+•	Use an explicit cursor when:
+o	A query returns multiple rows.
+o	You need fine control over fetching rows one by one.
+o	You want to perform operations on each row individually.
+•	Use an implicit cursor for simple queries that return a single row, where you don’t need row-by-row processing.
+________________________________________
+Lab Exercises
+Lab 1: PL/SQL block using an explicit cursor to retrieve and display employee details
+DECLARE
+    CURSOR emp_cursor IS
+        SELECT emp_id, emp_name, dept_id FROM employees;
+
+    emp_rec emp_cursor%ROWTYPE;
+BEGIN
+    OPEN emp_cursor;
+
+    LOOP
+        FETCH emp_cursor INTO emp_rec;
+        EXIT WHEN emp_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('ID: ' || emp_rec.emp_id || 
+                             ', Name: ' || emp_rec.emp_name || 
+                             ', Dept ID: ' || emp_rec.dept_id);
+    END LOOP;
+
+    CLOSE emp_cursor;
+END;
+/
+________________________________________
+Lab 2: Create a cursor to retrieve all courses and display them one by one
+DECLARE
+    CURSOR course_cursor IS
+        SELECT course_id, course_name, course_duration FROM courses;
+
+    course_rec course_cursor%ROWTYPE;
+BEGIN
+    OPEN course_cursor;
+
+    LOOP
+        FETCH course_cursor INTO course_rec;
+        EXIT WHEN course_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Course ID: ' || course_rec.course_id || 
+                             ', Name: ' || course_rec.course_name || 
+                             ', Duration: ' || course_rec.course_duration);
+    END LOOP;
+
+    CLOSE course_cursor;
+END;
+/
+
+
+
+19. Rollback and Commit Savepoint
+
+Theory Questions
+1. Explain the concept of SAVEPOINT in transaction management. How do ROLLBACK and COMMIT interact with savepoints?
+•	A SAVEPOINT is a marker within a transaction that allows partial rollback to a specific point without rolling back the entire transaction.
+•	Interaction with ROLLBACK and COMMIT:
+o	ROLLBACK TO SAVEPOINT savepoint_name; → Undoes changes after the savepoint but keeps earlier changes.
+o	COMMIT; → Saves all changes in the transaction, after which savepoints are removed.
+________________________________________
+2. When is it useful to use savepoints in a database transaction?
+•	Partial rollback: Undo only specific steps without losing all progress.
+•	Complex transactions: When multiple operations are performed and some may fail.
+•	Error recovery: Savepoints help recover from intermediate errors without starting over.
+•	Testing scenarios: Allows safe trial operations within a transaction.
+________________________________________
+Lab Exercises
+Lab 1: Transaction with SAVEPOINT and rollback
+START TRANSACTION;
+
+-- Insert first set of records
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(108, 'Economics', '5 months');
+
+-- Create a savepoint
+SAVEPOINT after_first_insert;
+
+-- Insert second set of records
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(109, 'Psychology', '6 months');
+
+-- Rollback to savepoint (undo second insert only)
+ROLLBACK TO SAVEPOINT after_first_insert;
+
+-- Commit the first insert
+COMMIT;
+________________________________________
+Lab 2: Commit part of a transaction and rollback remaining changes
+START TRANSACTION;
+
+-- Insert records
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(110, 'Sociology', '4 months');
+
+-- Create savepoint
+SAVEPOINT before_additional_insert;
+
+-- Insert more records
+INSERT INTO courses (course_id, course_name, course_duration) VALUES
+(111, 'Philosophy', '5 months');
+
+-- Commit up to the savepoint
+COMMIT;
+
+-- Rollback remaining changes (any inserts after commit are already saved)
+ROLLBACK;
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
